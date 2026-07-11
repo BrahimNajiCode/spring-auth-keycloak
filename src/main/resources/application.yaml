@@ -1,3 +1,74 @@
 spring:
   application:
     name: spring-auth-keycloak
+  config:
+    import: optional:file:.env[.properties]
+
+# === DB ===
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# ==== Security ===
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI}
+
+      client:
+        registration:
+          keycloak-admin:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            authorization-grant-type: ${AUTH_GRANT_TYPE}
+            scope: ${SCOPE}
+        provider:
+          keycloak-admin:
+            token-uri: ${KEYCLOAK_TOKEN_URI}
+  web:
+    error:
+      include-message: never
+      include-stacktrace: never
+
+# === props to use admin rest client ===
+
+keycloak:
+  server-url: ${KEYCLOAK_SERVER_URL}
+  realm: ${REALM}
+  admin-client-id: ${CLIENT_ID}
+  admin-client-secret: ${CLIENT_SECRET}
+
+# === Server ===
+server:
+  port: 8080
+
+# === Actuator ===
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when_authorized
+
+# === Logging ===
+logging:
+  level:
+    com.brahim.auth: DEBUG
+    org.springframework.security: INFO
+    org.keycloak: INFO
+
+
+
