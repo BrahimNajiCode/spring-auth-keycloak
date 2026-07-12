@@ -48,6 +48,7 @@ keycloak:
   realm: ${REALM}
   admin-client-id: ${CLIENT_ID}
   admin-client-secret: ${CLIENT_SECRET}
+  public-client-id: ${KEYCLOAK_PUBLIC_CLIENT_ID:my-app}
 
 # === Server ===
 server:
