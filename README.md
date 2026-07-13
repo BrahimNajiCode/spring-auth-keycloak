@@ -118,9 +118,24 @@
 
 4. **Configure the Keycloak Realm:**
 
+   > [!WARNING]
+   > If your client is confidential (Client authentication: ON), you must include the client_secret in all token requests — including login and refresh.
+
    - Open the Keycloak Admin Console at `http://localhost:8081` and log in with your `KEYCLOAK_ADMIN` credentials.
    - Create a new realm named **`Auth`**.
-   - Create a **confidential client** (`auth-spring-client`) with `client_credentials` grant enabled. Copy the generated client secret into your `.env`.
+   - Create a **confidential client** (`auth-spring-client`) with `client_credentials` grant enabled.
+     - **Settings tab:**
+       - Client authentication: ON
+       - Authorization: OFF
+       - Authentication flow: Standard flow ✓, Direct access grants ✓, Service accounts roles ✓
+     - **Credentials tab:**
+       - Client Authenticator: Client Id and Secret
+       - Copy the secret and set it as KEYCLOAK_ADMIN_CLIENT_SECRET
+     - **Service accounts roles tab:**
+       - Filter by clients → realm-management
+       - Assign: manage-users, view-users
+     - **Client scopes tab:**
+       - Ensure these are present: roles, profile, email, openid
    - Create a **public client** for your front-end / testing (e.g. `my-app`) with `password` grant enabled.
    - Create the required roles (e.g. `ROLE_USER`, `ROLE_ADMIN`) in the realm.
 
