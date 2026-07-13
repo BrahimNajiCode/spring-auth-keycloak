@@ -1,13 +1,14 @@
 package com.brahim.auth.security;
 
 
-import com.brahim.auth.exception.UnauthorizedException;
+import com.brahim.auth.exception.BusinessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
 import java.util.Objects;
+import static com.brahim.auth.exception.ErrorCode.UNAUTHORIZED;
 
 /**
  * Utility bean for accessing the current authenticated user's JWT claims
@@ -35,7 +36,7 @@ public class SecurityContextHelper {
         if(auth instanceof JwtAuthenticationToken jwtAuth){
             return jwtAuth.getToken();
         }
-        throw new UnauthorizedException("No authenticated JWT found in SecurityContext");
+        throw new BusinessException(UNAUTHORIZED);
     }
 
     /** Returns the Keycloak user UUID (sub claim). */

@@ -1,6 +1,8 @@
 package com.brahim.auth.config;
 
 import com.brahim.auth.security.JwtAccessDeniedHandler;
+import com.brahim.auth.security.JwtAuthenticationConverter;
+import com.brahim.auth.security.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +11,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
@@ -20,7 +21,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtAuthenticationConverter jwtAuthenticationConverter;
-    private final JwtAuthenticationEntyPoint AuthenticationEntyPoint; //401
+    private final JwtAuthenticationEntryPoint AuthenticationEntyPoint; //401
     private final JwtAccessDeniedHandler accessDeniedHandler ; //403
     private final String[] PUBLIC_ENDPOINTS = {
             "/api/v1/auth/register",
