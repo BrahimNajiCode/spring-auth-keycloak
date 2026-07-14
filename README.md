@@ -9,6 +9,7 @@
   <img src="https://img.shields.io/badge/PostgreSQL-17-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
   <img src="https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
   <img src="https://img.shields.io/badge/OAuth2-JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" />
+    ![CI](https://github.com/BrahimNajiCode/spring-auth-keycloak/actions/workflows/ci.yml/badge.svg)
 </p>
 
 **A production-ready Spring Boot authentication service that delegates identity management to Keycloak, exposing clean OAuth2/JWT-secured REST endpoints for registration, login, token refresh, and user management.**

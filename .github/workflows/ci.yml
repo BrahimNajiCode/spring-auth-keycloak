@@ -2,7 +2,7 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ "feature/**", "develop" ]
   pull_request:
     branches: [ main ]
 
@@ -22,16 +22,18 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
+      - name: Build
         run: mvn clean compile -B
 
       - name: Run tests
         run: mvn test -B
+        env:
+          SPRING_PROFILES_ACTIVE: test
 
-      - name: Package (skip tests)
+      - name: Package
         run: mvn package -DskipTests -B
 
-      - name: Upload JAR artifact
+      - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: app-jar
