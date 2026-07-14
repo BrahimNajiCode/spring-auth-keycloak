@@ -32,4 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 
-.env./all_code.txt
+.env
+all_code.txt
